@@ -55,14 +55,62 @@ export default function Hero({ onOpenBooking }) {
               className="border-l-2 border-[#BF953F]/40 pl-6 space-y-2 max-w-lg"
             >
               <h2 className="font-serif text-lg tracking-widest text-[#BF953F] uppercase font-semibold">ELITE FITNESS & COUTURE</h2>
-              <p className="text-gray-400 text-xs tracking-wider uppercase font-light leading-relaxed">
+              <p className="text-white text-xs tracking-wider uppercase font-bold leading-relaxed">
                 An international-quality sanctuary for women's lifestyle and physique empowerment.
               </p>
             </motion.div>
 
-            {/* CTA Action Buttons side-by-side */}
+            {/* Premium Social Media Connect Icons */}
             <motion.div 
-              className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto"
+              className="flex items-center gap-4 pt-1"
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 0.25 }}
+            >
+              <span className="text-[10px] tracking-[0.25em] font-bold uppercase text-gray-500">Connect:</span>
+              <div className="flex gap-3">
+                <a 
+                  href="https://www.instagram.com/zumba_eluru/" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="p-2 rounded-xl bg-white/5 border border-white/10 text-gray-400 hover:text-white hover:bg-gradient-to-tr hover:from-yellow-600 hover:via-red-500 hover:to-purple-600 hover:border-transparent transition-all duration-300 hover:scale-110"
+                  aria-label="Instagram"
+                >
+                  <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+                  </svg>
+                </a>
+                <a 
+                  href="https://www.facebook.com/" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="p-2 rounded-xl bg-white/5 border border-white/10 text-gray-400 hover:text-white hover:bg-blue-600 hover:border-transparent transition-all duration-300 hover:scale-110"
+                  aria-label="Facebook"
+                >
+                  <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+                  </svg>
+                </a>
+                <a 
+                  href="https://www.youtube.com/@sushmasfitnessworld8866" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="p-2 rounded-xl bg-white/5 border border-white/10 text-gray-400 hover:text-white hover:bg-red-600 hover:border-transparent transition-all duration-300 hover:scale-110"
+                  aria-label="YouTube"
+                >
+                  <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17" />
+                    <polygon points="10 15 15 12 10 9" fill="currentColor" />
+                  </svg>
+                </a>
+              </div>
+            </motion.div>
+
+            {/* CTA Action Buttons side-by-side - DESKTOP ONLY */}
+            <motion.div 
+              className="hidden lg:flex flex-col sm:flex-row gap-4 w-full sm:w-auto"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.3 }}
@@ -124,6 +172,31 @@ export default function Hero({ onOpenBooking }) {
               </div>
             </motion.div>
           </div>
+
+          {/* CTA Action Buttons side-by-side - MOBILE ONLY */}
+          <motion.div 
+            className="col-span-1 lg:hidden flex flex-col sm:flex-row gap-4 w-full"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+          >
+            <button
+              onClick={() => onOpenBooking('zumba')}
+              className="flex items-center justify-center gap-2.5 px-8 py-4 rounded-xl text-xs font-bold uppercase tracking-widest text-white bg-transparent border-2 border-white/10 hover:border-[#FF7F50] hover:bg-[#FF7F50]/15 hover:shadow-[0_0_20px_rgba(255,127,80,0.25)] transition-all duration-300 cursor-pointer w-full"
+            >
+              <Activity size={14} className="text-[#FF7F50]" />
+              Join Zumba Classes
+            </button>
+            
+            <button
+              onClick={() => onOpenBooking('boutique')}
+              className="flex items-center justify-center gap-2.5 px-8 py-4 rounded-xl text-xs font-bold uppercase tracking-widest text-black bg-gold-gradient shadow-[0_0_15px_rgba(191,149,63,0.3)] gold-glow-hover hover:scale-[1.03] active:scale-95 transition-all duration-300 cursor-pointer w-full"
+            >
+              <Scissors size={14} />
+              Explore Boutique
+              <ArrowRight size={14} />
+            </button>
+          </motion.div>
 
         </div>
       </div>

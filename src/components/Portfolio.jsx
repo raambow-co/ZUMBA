@@ -58,9 +58,9 @@ export default function Portfolio() {
   const getRadius = () => {
     // Dynamic cylindrical radius depending on screen width
     if (typeof window !== 'undefined' && window.innerWidth < 640) {
-      return 260; // Mobile projection radius
+      return 290; // Mobile projection radius
     }
-    return 360; // Desktop projection radius
+    return 400; // Desktop projection radius
   };
 
   const radius = getRadius();
@@ -73,11 +73,11 @@ export default function Portfolio() {
       <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
         
         {/* Rebuilt 3D Cylindrical Carousel Stage */}
-        <div className="relative h-[360px] sm:h-[460px] md:h-[500px] flex items-center justify-center overflow-visible [perspective:1400px]">
+        <div className="relative h-[420px] sm:h-[520px] md:h-[580px] flex items-center justify-center overflow-visible [perspective:1400px]">
           
           {/* Hardware-Accelerated 3D Cylinder Container */}
           <div 
-            className="relative w-[220px] sm:w-[280px] md:w-[320px] h-[300px] sm:h-[400px] md:h-[420px] [transform-style:preserve-3d] will-change-transform"
+            className="relative w-[240px] sm:w-[300px] md:w-[360px] h-[340px] sm:h-[420px] md:h-[480px] [transform-style:preserve-3d] will-change-transform"
             style={{
               transform: `translateZ(-${radius}px) rotateY(${rotation}deg)`,
               transition: 'transform 1.2s cubic-bezier(0.2, 0.8, 0.2, 1)',
