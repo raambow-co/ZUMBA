@@ -1,0 +1,113 @@
+@import "tailwindcss";
+
+@theme {
+  --font-serif: "Playfair Display", Georgia, serif;
+  --font-sans: "Inter", sans-serif;
+  --font-display: "Montserrat", sans-serif;
+  
+  --color-gold-light: #FBF5B7;
+  --color-gold-medium: #D4AF37;
+  --color-gold-dark: #AA771C;
+  --color-peach-light: #FFDAB9;
+  --color-peach-dark: #FADADD;
+  --color-luxury-black: #0A0A0A;
+  --color-luxury-dark: #121212;
+}
+
+body {
+  background-color: #050505;
+  color: #f3f4f6;
+  font-family: var(--font-sans);
+}
+
+/* Custom styles for luxury styling */
+.text-gold-gradient {
+  background: linear-gradient(135deg, #BF953F 0%, #FCF6BA 30%, #B38728 70%, #FBF5B7 100%);
+  -webkit-background-clip: text;
+  -webkit-background-clip: text; /* Fallback */
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-orange-glow-gradient {
+  background: linear-gradient(135deg, #FF7F50 0%, #FF8C00 50%, #FFDAB9 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.bg-gold-gradient {
+  background: linear-gradient(135deg, #BF953F 0%, #FCF6BA 50%, #B38728 100%);
+}
+
+.bg-gold-text-gradient {
+  background: linear-gradient(135deg, #BF953F 0%, #FCF6BA 50%, #B38728 100%);
+}
+
+.bg-dark-gradient {
+  background: linear-gradient(180deg, #0A0A0A 0%, #121212 100%);
+}
+
+.glassmorphism {
+  background: rgba(10, 10, 10, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.glassmorphism-light {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.glassmorphism-gold {
+  background: rgba(191, 149, 63, 0.04);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(191, 149, 63, 0.15);
+}
+
+/* Glowing effects */
+.gold-glow {
+  box-shadow: 0 0 25px rgba(191, 149, 63, 0.12);
+}
+
+.gold-glow-hover:hover {
+  box-shadow: 0 0 35px rgba(191, 149, 63, 0.3);
+}
+
+.orange-glow {
+  box-shadow: 0 0 25px rgba(255, 127, 80, 0.12);
+}
+
+.orange-glow-hover:hover {
+  box-shadow: 0 0 35px rgba(255, 127, 80, 0.25);
+}
+
+/* Custom scrollbars */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #050505;
+}
+::-webkit-scrollbar-thumb {
+  background: #222;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #BF953F;
+}
+
+/* App width resetting default */
+#root {
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+  text-align: left !important;
+  border-inline: none !important;
+  min-height: auto !important;
+  display: block !important;
+}
