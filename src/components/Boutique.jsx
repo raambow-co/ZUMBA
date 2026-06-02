@@ -1,3 +1,4 @@
+//auto check vercel uploading the code or not
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Scissors, Sparkles, Shirt, Gem, ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react';
@@ -8,6 +9,7 @@ import tailoringImg from '../assets/c6.jpg';
 
 export default function Boutique({ onOpenBooking }) {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [direction, setDirection] = useState(1); // 1 = next, -1 = prev
 
   const slides = [
     {
@@ -51,17 +53,35 @@ export default function Boutique({ onOpenBooking }) {
   // Auto transition slides every 6 seconds
   useEffect(() => {
     const timer = setInterval(() => {
+      setDirection(1);
       setCurrentSlide((prev) => (prev + 1) % slides.length);
     }, 6000);
     return () => clearInterval(timer);
-  }, []);
+  }, [slides.length]);
 
   const handleNext = () => {
+    setDirection(1);
     setCurrentSlide((prev) => (prev + 1) % slides.length);
   };
 
   const handlePrev = () => {
+    setDirection(-1);
     setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
+  };
+
+  const slideVariants = {
+    enter: (dir) => ({
+      x: dir > 0 ? 80 : -80,
+      opacity: 0
+    }),
+    center: {
+      x: 0,
+      opacity: 1
+    },
+    exit: (dir) => ({
+      x: dir < 0 ? 80 : -80,
+      opacity: 0
+    })
   };
 
   return (
@@ -84,24 +104,37 @@ export default function Boutique({ onOpenBooking }) {
 
         {/* Main Slideshow View Area */}
         <div className="relative min-h-[580px] lg:min-h-[460px] glassmorphism-gold rounded-[40px] border border-[#BF953F]/15 p-6 md:p-10 lg:p-12 overflow-hidden shadow-2xl flex flex-col justify-center">
-          
-          <AnimatePresence mode="wait">
+
+          <AnimatePresence mode="wait" custom={direction}>
             {slides.map((slide, index) => (
               index === currentSlide && (
-                <motion.div 
+                <motion.div
                   key={slide.id}
+                  custom={direction}
+                  variants={slideVariants}
+                  initial="enter"
+                  animate="center"
+                  exit="exit"
+                  transition={{ duration: 0.6, ease: [0.25, 1, 0.5, 1] }}
                   className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center"
-                  initial={{ opacity: 0, x: 50 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -50 }}
-                  transition={{ duration: 0.6, ease: "easeInOut" }}
                 >
                   {/* Left Side: Text info */}
                   <div className="lg:col-span-6 space-y-6 text-left">
                     <div className="flex items-center gap-3">
-                      <div className="p-3.5 rounded-2xl bg-white/5 border border-white/10">
+                      <motion.div
+                        className="p-3.5 rounded-2xl bg-white/5 border border-[#BF953F]/20 shadow-[0_0_15px_rgba(191,149,63,0.1)]"
+                        animate={{
+                          boxShadow: ["0 0 10px rgba(191,149,63,0.1)", "0 0 20px rgba(191,149,63,0.35)", "0 0 10px rgba(191,149,63,0.1)"],
+                          borderColor: ["rgba(191, 149, 63, 0.2)", "rgba(191, 149, 63, 0.6)", "rgba(191, 149, 63, 0.2)"]
+                        }}
+                        transition={{
+                          duration: 3,
+                          repeat: Infinity,
+                          ease: "easeInOut"
+                        }}
+                      >
                         {slide.icon}
-                      </div>
+                      </motion.div>
                       <div>
                         <span className="text-[9px] tracking-widest font-bold uppercase text-[#BF953F]">
                           {slide.sub}
@@ -115,7 +148,7 @@ export default function Boutique({ onOpenBooking }) {
                     <h3 className="font-serif text-3xl sm:text-4xl font-bold text-white tracking-wide leading-tight">
                       {slide.title}
                     </h3>
-                    
+
                     <p className="text-gray-300 text-sm sm:text-base font-light leading-relaxed">
                       {slide.desc}
                     </p>
@@ -132,19 +165,19 @@ export default function Boutique({ onOpenBooking }) {
                   {/* Right Side: Image holder with focuses */}
                   <div className="lg:col-span-6 relative">
                     <div className="absolute -inset-1 rounded-3xl bg-gradient-to-r from-[#BF953F]/15 via-transparent to-[#BF953F]/10 blur opacity-60 pointer-events-none" />
-                    
-                    <motion.div 
+
+                    <motion.div
                       className="relative overflow-hidden rounded-3xl h-[280px] sm:h-[350px] w-full border border-white/10"
                       initial={{ scale: 0.95, opacity: 0 }}
                       animate={{ scale: 1, opacity: 1 }}
                       transition={{ duration: 0.5, delay: 0.15 }}
                     >
-                      <img 
-                        src={slide.image} 
+                      <img
+                        src={slide.image}
                         alt={slide.title}
                         className="w-full h-full object-cover"
                       />
-                      
+
                       {/* Artistic overlay */}
                       <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
                     </motion.div>
@@ -162,7 +195,7 @@ export default function Boutique({ onOpenBooking }) {
             >
               <ChevronLeft size={16} />
             </button>
-            
+
             <button
               onClick={handleNext}
               className="p-3 rounded-full bg-black/50 hover:bg-[#BF953F]/15 text-white/70 hover:text-white border border-white/10 hover:border-[#BF953F]/40 transition-all duration-300 cursor-pointer"
@@ -176,12 +209,14 @@ export default function Boutique({ onOpenBooking }) {
             {slides.map((_, idx) => (
               <button
                 key={idx}
-                onClick={() => setCurrentSlide(idx)}
-                className={`h-2.5 rounded-full transition-all duration-500 cursor-pointer ${
-                  currentSlide === idx 
-                    ? 'w-8 bg-gold-gradient shadow-[0_0_8px_rgba(191,149,63,0.5)]' 
+                onClick={() => {
+                  setDirection(idx > currentSlide ? 1 : -1);
+                  setCurrentSlide(idx);
+                }}
+                className={`h-2.5 rounded-full transition-all duration-500 cursor-pointer ${currentSlide === idx
+                    ? 'w-8 bg-gold-gradient shadow-[0_0_8px_rgba(191,149,63,0.5)]'
                     : 'w-2.5 bg-white/20 hover:bg-white/40'
-                }`}
+                  }`}
               />
             ))}
           </div>

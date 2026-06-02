@@ -56,9 +56,28 @@ export default function Contact() {
             </div>
 
             {/* Info Cards */}
-            <div className="space-y-4">
+            <motion.div 
+              className="space-y-4"
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-100px" }}
+              variants={{
+                hidden: {},
+                visible: {
+                  transition: {
+                    staggerChildren: 0.15
+                  }
+                }
+              }}
+            >
               {/* Address Card */}
-              <div className="flex gap-4 p-5 rounded-2xl glassmorphism border border-white/5 hover:border-gold-medium/10 transition-colors shadow-lg">
+              <motion.div 
+                variants={{
+                  hidden: { opacity: 0, y: 30 },
+                  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
+                }}
+                className="flex gap-4 p-5 rounded-2xl glassmorphism border border-white/5 hover:border-gold-medium/10 hover:shadow-[0_0_25px_rgba(191,149,63,0.15)] transition-all duration-300 shadow-lg"
+              >
                 <div className="p-3 rounded-xl bg-white/5 text-[#BF953F] h-fit">
                   <MapPin size={18} />
                 </div>
@@ -70,10 +89,16 @@ export default function Contact() {
                     Satrampadu, Eluru, Andhra Pradesh – 534006
                   </p>
                 </div>
-              </div>
+              </motion.div>
 
               {/* Call Card */}
-              <div className="flex gap-4 p-5 rounded-2xl glassmorphism border border-white/5 hover:border-gold-medium/10 transition-colors shadow-lg">
+              <motion.div 
+                variants={{
+                  hidden: { opacity: 0, y: 30 },
+                  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
+                }}
+                className="flex gap-4 p-5 rounded-2xl glassmorphism border border-white/5 hover:border-gold-medium/10 hover:shadow-[0_0_25px_rgba(191,149,63,0.15)] transition-all duration-300 shadow-lg"
+              >
                 <div className="p-3 rounded-xl bg-white/5 text-[#BF953F] h-fit">
                   <Phone size={18} />
                 </div>
@@ -85,23 +110,37 @@ export default function Contact() {
                     </a>
                   </p>
                 </div>
-              </div>
+              </motion.div>
 
               {/* Email Card */}
-              <div className="flex gap-4 p-5 rounded-2xl glassmorphism border border-white/5 hover:border-gold-medium/10 transition-colors shadow-lg">
+              <motion.div 
+                variants={{
+                  hidden: { opacity: 0, y: 30 },
+                  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
+                }}
+                className="flex gap-4 p-5 rounded-2xl glassmorphism border border-white/5 hover:border-gold-medium/10 hover:shadow-[0_0_25px_rgba(191,149,63,0.15)] transition-all duration-300 shadow-lg"
+              >
                 <div className="p-3 rounded-xl bg-white/5 text-[#BF953F] h-fit">
                   <Mail size={18} />
                 </div>
                 <div>
                   <h4 className="font-display font-semibold text-xs tracking-wider text-[#BF953F] uppercase">Email Support</h4>
                   <p className="text-gray-300 text-xs sm:text-sm font-light mt-1.5">
-                    hello@sushmasweightlossclub.com
+                    <a href="mailto:sushmatanakala@gmail.com" className="text-gray-300 hover:text-[#BF953F] transition-colors font-semibold">
+                      sushmatanakala@gmail.com
+                    </a>
                   </p>
                 </div>
-              </div>
+              </motion.div>
 
               {/* Hours Card */}
-              <div className="flex gap-4 p-5 rounded-2xl glassmorphism border border-white/5 hover:border-gold-medium/10 transition-colors shadow-lg">
+              <motion.div 
+                variants={{
+                  hidden: { opacity: 0, y: 30 },
+                  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
+                }}
+                className="flex gap-4 p-5 rounded-2xl glassmorphism border border-white/5 hover:border-gold-medium/10 hover:shadow-[0_0_25px_rgba(191,149,63,0.15)] transition-all duration-300 shadow-lg"
+              >
                 <div className="p-3 rounded-xl bg-white/5 text-[#BF953F] h-fit">
                   <Clock size={18} />
                 </div>
@@ -111,8 +150,8 @@ export default function Contact() {
                     <span className="text-white font-medium">Zumba & Weight Loss:</span> Mon - Sat (06:00 AM - 11:30 AM | 04:30 PM - 08:30 PM)
                   </p>
                 </div>
-              </div>
-            </div>
+              </motion.div>
+            </motion.div>
           </div>
 
           {/* Column 2: Contact Form */}

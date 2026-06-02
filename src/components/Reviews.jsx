@@ -87,15 +87,26 @@ export default function Reviews() {
                 <motion.div
                   key={rev.id}
                   className="p-8 md:p-12 rounded-[32px] glassmorphism border border-white/10 relative shadow-2xl flex flex-col justify-between"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -20 }}
-                  transition={{ duration: 0.5 }}
+                  initial={{ opacity: 0, scale: 0.97, y: 15 }}
+                  animate={{ opacity: 1, scale: 1, y: 0 }}
+                  exit={{ opacity: 0, scale: 0.97, y: -15 }}
+                  transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
                 >
                   {/* Quote icon watermark */}
-                  <div className="absolute top-6 right-8 text-white/5 pointer-events-none">
+                  <motion.div 
+                    className="absolute top-6 right-8 text-white/5 pointer-events-none"
+                    animate={{
+                      y: [0, -6, 0],
+                      scale: [1, 1.05, 1]
+                    }}
+                    transition={{
+                      duration: 5,
+                      repeat: Infinity,
+                      ease: "easeInOut"
+                    }}
+                  >
                     <Quote size={100} />
-                  </div>
+                  </motion.div>
 
                   <div>
                     {/* Stars & Category */}

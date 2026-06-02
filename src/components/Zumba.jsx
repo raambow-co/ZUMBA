@@ -71,29 +71,46 @@ export default function Zumba({ onOpenBooking }) {
         </div>
 
         {/* Benefits Cards Row */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-20">
-          <div className="p-6 rounded-2xl glassmorphism border border-white/5 orange-glow text-center">
-            <Flame className="text-[#FF7F50] mx-auto mb-4" size={32} />
-            <h4 className="font-display font-semibold text-lg text-white mb-2">Torch 800+ Calories</h4>
-            <p className="text-gray-400 text-sm font-light leading-relaxed">
-              Ditch the boring gym routine. Burn maximum calories through continuous dance choreography.
-            </p>
-          </div>
-          <div className="p-6 rounded-2xl glassmorphism border border-white/5 orange-glow text-center">
-            <Zap className="text-[#FFDAB9] mx-auto mb-4" size={32} />
-            <h4 className="font-display font-semibold text-lg text-white mb-2">Elevate Stamina & Mood</h4>
-            <p className="text-gray-400 text-sm font-light leading-relaxed">
-              Zumba increases endorphins, boosts cardiorespiratory stamina, and leaves you feeling ecstatic.
-            </p>
-          </div>
-          <div className="p-6 rounded-2xl glassmorphism border border-white/5 orange-glow text-center">
-            <Dumbbell className="text-[#FF7F50] mx-auto mb-4" size={32} />
-            <h4 className="font-display font-semibold text-lg text-white mb-2">Tone & Define Muscles</h4>
-            <p className="text-gray-400 text-sm font-light leading-relaxed">
-              Integrate resistance intervals to sculpt your legs, glutes, core, and shoulders simultaneously.
-            </p>
-          </div>
-        </div>
+        <motion.div 
+          className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-20"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={{
+            hidden: {},
+            visible: {
+              transition: {
+                staggerChildren: 0.15
+              }
+            }
+          }}
+        >
+          {[
+            { icon: <Flame className="text-[#FF7F50] mx-auto mb-4" size={32} />, title: "Torch 800+ Calories", desc: "Ditch the boring gym routine. Burn maximum calories through continuous dance choreography." },
+            { icon: <Zap className="text-[#FFDAB9] mx-auto mb-4" size={32} />, title: "Elevate Stamina & Mood", desc: "Zumba increases endorphins, boosts cardiorespiratory stamina, and leaves you feeling ecstatic." },
+            { icon: <Dumbbell className="text-[#FF7F50] mx-auto mb-4" size={32} />, title: "Tone & Define Muscles", desc: "Integrate resistance intervals to sculpt your legs, glutes, core, and shoulders simultaneously." }
+          ].map((benefit, idx) => (
+            <motion.div 
+              key={idx}
+              variants={{
+                hidden: { opacity: 0, y: 30 },
+                visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
+              }}
+              whileHover={{ 
+                scale: 1.04, 
+                y: -6,
+                boxShadow: "0 15px 35px rgba(255, 127, 80, 0.15)",
+                borderColor: "rgba(255, 127, 80, 0.25)"
+              }}
+              transition={{ type: "spring", stiffness: 400, damping: 20 }}
+              className="p-6 rounded-2xl glassmorphism border border-white/5 orange-glow text-center transition-all duration-300 cursor-default"
+            >
+              {benefit.icon}
+              <h4 className="font-display font-semibold text-lg text-white mb-2">{benefit.title}</h4>
+              <p className="text-gray-400 text-sm font-light leading-relaxed">{benefit.desc}</p>
+            </motion.div>
+          ))}
+        </motion.div>
 
         {/* Programs and Schedule Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
@@ -106,11 +123,17 @@ export default function Zumba({ onOpenBooking }) {
               {zumbaPrograms.map((prog, idx) => (
                 <motion.div 
                   key={idx}
-                  className="p-5 rounded-2xl glassmorphism-light border border-white/5 hover:border-[#FF7F50]/20 transition-all duration-300 group hover:translate-y-[-2px]"
-                  initial={{ opacity: 0, y: 15 }}
+                  className="p-5 rounded-2xl glassmorphism-light border border-white/5 transition-all duration-300 group cursor-pointer"
+                  initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ delay: idx * 0.1 }}
+                  transition={{ delay: idx * 0.1, duration: 0.5 }}
+                  whileHover={{
+                    scale: 1.03,
+                    y: -4,
+                    borderColor: "rgba(255, 127, 80, 0.25)",
+                    boxShadow: "0 10px 25px rgba(255, 127, 80, 0.12)"
+                  }}
                 >
                   <div className="flex justify-between items-start mb-3">
                     <span className="text-[10px] font-bold tracking-wider text-black bg-[#FFDAB9] px-2 py-0.5 rounded-md uppercase">

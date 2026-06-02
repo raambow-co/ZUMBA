@@ -28,6 +28,41 @@ export default function Hero({ onOpenBooking }) {
       <div className="absolute top-1/4 left-1/4 w-[350px] h-[350px] bg-gold-dark/10 rounded-full blur-[140px] pointer-events-none z-0" />
       <div className="absolute bottom-1/3 right-1/4 w-[400px] h-[400px] bg-[#FF7F50]/5 rounded-full blur-[160px] pointer-events-none z-0" />
 
+      {/* Floating Animated Luxury Particles */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
+        {[
+          { size: 6, delay: 0, duration: 12, top: '20%', left: '15%', color: 'rgba(255, 127, 80, 0.25)' },
+          { size: 4, delay: 2, duration: 16, top: '40%', left: '80%', color: 'rgba(251, 245, 183, 0.35)' },
+          { size: 8, delay: 4, duration: 14, top: '70%', left: '25%', color: 'rgba(191, 149, 63, 0.25)' },
+          { size: 5, delay: 1, duration: 18, top: '85%', left: '70%', color: 'rgba(255, 218, 185, 0.25)' }
+        ].map((p, i) => (
+          <motion.div
+            key={i}
+            className="absolute rounded-full blur-[1.5px]"
+            style={{
+              width: p.size,
+              height: p.size,
+              top: p.top,
+              left: p.left,
+              backgroundColor: p.color,
+              boxShadow: `0 0 10px ${p.color}`
+            }}
+            animate={{
+              y: [0, -40, 0],
+              x: [0, 20, 0],
+              scale: [1, 1.3, 1],
+              opacity: [0.15, 0.6, 0.15]
+            }}
+            transition={{
+              duration: p.duration,
+              delay: p.delay,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+          />
+        ))}
+      </div>
+
       {/* Main Content Area - Split Editorial Layout */}
       <div className="relative z-10 flex-1 flex items-center w-full max-w-7xl mx-auto px-6 md:px-12 pt-28 pb-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center w-full">
@@ -46,6 +81,17 @@ export default function Hero({ onOpenBooking }) {
                 Sushma's Exclusive Hub
               </span>
             </motion.div>
+
+            {/* Breathtaking H1 Heading */}
+            <motion.h1 
+              className="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-white tracking-tight leading-[1.1] text-left"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1.0, ease: [0.16, 1, 0.3, 1], delay: 0.05 }}
+            >
+              Sweat in <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#FF7F50] via-[#FFDAB9] to-[#FF7F50] bg-[size:200%_auto] animate-pulse">Zumba</span>,<br />
+              Shine in <span className="text-gold-gradient italic font-normal">Couture</span>
+            </motion.h1>
 
             {/* Cinematic subtitle hook without main paragraphs */}
             <motion.div
@@ -210,9 +256,15 @@ export default function Hero({ onOpenBooking }) {
           transition={{ duration: 0.8, delay: 0.5 }}
         >
           {stats.map((stat, index) => (
-            <div 
+            <motion.div 
               key={index} 
-              className="text-center p-3 border-r last:border-r-0 border-white/5 flex flex-col justify-center items-center"
+              className="text-center p-3 border-r last:border-r-0 border-white/5 flex flex-col justify-center items-center cursor-default"
+              whileHover={{ 
+                scale: 1.05, 
+                y: -4,
+                textShadow: "0 0 10px rgba(191, 149, 63, 0.35)"
+              }}
+              transition={{ type: "spring", stiffness: 400, damping: 17 }}
             >
               <span className="font-display font-extrabold text-lg sm:text-2xl text-gold-gradient tracking-wide">
                 {stat.value}
@@ -220,7 +272,7 @@ export default function Hero({ onOpenBooking }) {
               <span className="text-[10px] sm:text-xs font-medium text-gray-400 tracking-widest uppercase mt-1">
                 {stat.label}
               </span>
-            </div>
+            </motion.div>
           ))}
         </motion.div>
       </div>

@@ -29,8 +29,14 @@ export default function Manifesto() {
         {/* Golden badge icon */}
         <motion.div
           className="inline-flex p-4 rounded-full bg-gradient-to-tr from-[#BF953F]/10 via-[#FF7F50]/15 to-[#FFDAB9]/10 border border-[#BF953F]/20 mb-8 shadow-inner"
-          animate={{ rotate: 360 }}
-          transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+          animate={{ 
+            rotate: 360,
+            y: [0, -8, 0]
+          }}
+          transition={{ 
+            rotate: { duration: 25, repeat: Infinity, ease: "linear" },
+            y: { duration: 4, repeat: Infinity, ease: "easeInOut" }
+          }}
         >
           <Sparkles className="text-gold-light" size={28} />
         </motion.div>
@@ -74,28 +80,43 @@ export default function Manifesto() {
         {/* Dynamic highlights below text */}
         <motion.div 
           className="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-4xl mx-auto mt-16"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8, delay: 0.3 }}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={{
+            hidden: {},
+            visible: {
+              transition: {
+                staggerChildren: 0.15
+              }
+            }
+          }}
         >
-          <div className="p-6 rounded-2xl glassmorphism border border-white/5 relative overflow-hidden group hover:border-[#FF7F50]/20 transition-all duration-300">
-            <Zap className="text-[#FF7F50] mb-2.5 mx-auto" size={20} />
-            <h4 className="font-display font-bold text-xs tracking-widest text-white uppercase mb-1">UNBRIDLED POWER</h4>
-            <p className="text-[11px] text-gray-400 font-light leading-relaxed">Igniting fitness stamina and cardiac wellness.</p>
-          </div>
-          
-          <div className="p-6 rounded-2xl glassmorphism border border-white/5 relative overflow-hidden group hover:border-[#BF953F]/20 transition-all duration-300">
-            <Sparkles className="text-gold-medium mb-2.5 mx-auto" size={20} />
-            <h4 className="font-display font-bold text-xs tracking-widest text-white uppercase mb-1">BESPOKE BEAUTY</h4>
-            <p className="text-[11px] text-gray-400 font-light leading-relaxed">Embellishing your style in customized drapes.</p>
-          </div>
-          
-          <div className="p-6 rounded-2xl glassmorphism border border-white/5 relative overflow-hidden group hover:border-[#FFDAB9]/20 transition-all duration-300">
-            <Heart className="text-[#FFDAB9] mb-2.5 mx-auto" size={20} />
-            <h4 className="font-display font-bold text-xs tracking-widest text-white uppercase mb-1">PURE EMPOWERMENT</h4>
-            <p className="text-[11px] text-gray-400 font-light leading-relaxed">Celebrating the physical strength of active women.</p>
-          </div>
+          {[
+            { icon: <Zap className="text-[#FF7F50] mb-2.5 mx-auto" size={20} />, title: "UNBRIDLED POWER", desc: "Igniting fitness stamina and cardiac wellness.", accentColor: "#FF7F50" },
+            { icon: <Sparkles className="text-gold-medium mb-2.5 mx-auto" size={20} />, title: "BESPOKE BEAUTY", desc: "Embellishing your style in customized drapes.", accentColor: "#BF953F" },
+            { icon: <Heart className="text-[#FFDAB9] mb-2.5 mx-auto" size={20} />, title: "PURE EMPOWERMENT", desc: "Celebrating the physical strength of active women.", accentColor: "#FFDAB9" }
+          ].map((item, idx) => (
+            <motion.div 
+              key={idx}
+              variants={{
+                hidden: { opacity: 0, y: 30 },
+                visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
+              }}
+              whileHover={{ 
+                scale: 1.04, 
+                y: -6,
+                borderColor: `${item.accentColor}40`,
+                boxShadow: `0 10px 30px ${item.accentColor}15`
+              }}
+              transition={{ type: "spring", stiffness: 400, damping: 20 }}
+              className="p-6 rounded-2xl glassmorphism border border-white/5 relative overflow-hidden group transition-all duration-300 cursor-default"
+            >
+              {item.icon}
+              <h4 className="font-display font-bold text-xs tracking-widest text-white uppercase mb-1">{item.title}</h4>
+              <p className="text-[11px] text-gray-400 font-light leading-relaxed">{item.desc}</p>
+            </motion.div>
+          ))}
         </motion.div>
       </div>
     </section>

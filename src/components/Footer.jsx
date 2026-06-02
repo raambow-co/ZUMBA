@@ -43,7 +43,7 @@ export default function Footer() {
               </p>
               <p className="flex items-center gap-2">
                 <span className="text-[#BF953F] font-semibold">Email:</span>
-                <a href="mailto:hello@sushmasweightlossclub.com" className="hover:text-[#BF953F] transition-colors">hello@sushmasweightlossclub.com</a>
+                <a href="mailto:sushmatanakala@gmail.com" className="hover:text-[#BF953F] transition-colors">sushmatanakala@gmail.com</a>
               </p>
               <p className="leading-relaxed">
                 <span className="text-[#BF953F] font-semibold">Location:</span> Opposite Sowbhagya Lakshmi Temple, Satrampadu, Eluru
